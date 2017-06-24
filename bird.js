@@ -2,11 +2,11 @@ function Bird(){
 
   this.y = width/2;
   this.x = 25;
-  this.radius = 32;
-  this.gravity = 0.6;
+  this.radius = 20;
+  this.gravity = 0.8;
   this.velocity = 0;
   this.lift = -20;
-  this.airResistance  = 0.99;
+  this.airResistance  = 0.90;
 
   this.show = function(){
     fill(255);
