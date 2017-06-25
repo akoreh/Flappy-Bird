@@ -1,14 +1,14 @@
 function Pipe(){
-  this.space = random(50,80);
-  this.spaceY = random(30,height);
-
-  this.width = 20;
-  this.speed = 2;
+  this.space = random(40,70);
+  this.spaceY = random(30,height-40);
+  this.color = random(255);
+  this.width = 35;
+  this.speed = 2.7;
   this.x = width;
 
 
   this.show = function(){
-    fill(255);
+    fill(this.color, 255, 255);
     rect(this.x, -1, this.width, this.spaceY-this.space);
     rect(this.x, this.spaceY+this.space, this.width, height);
   }

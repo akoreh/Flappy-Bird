@@ -1,5 +1,5 @@
 function Bird(){
-
+  this.color  = random(255);
   this.y = width/2;
   this.x = 25;
   this.radius = 20;
@@ -9,7 +9,7 @@ function Bird(){
   this.airResistance  = 0.90;
 
   this.show = function(){
-    fill(255);
+    fill(this.color,255,255);
     ellipse(this.x,this.y,this.radius,this.radius);
   }
 
@@ -23,12 +23,16 @@ function Bird(){
       this.velocity += this.gravity;
       this.velocity *= this.airResistance;
       this.y += this.velocity;
-    }else if(this.y >= height){
+    }else if(this.y > height){
       this.y = height;
       this.velocity=0;
     }else if(this.y < 0){
       this.y = 0;
     }
+  }
+
+  this.changeColor = function(color){
+    this.color=color;
   }
 
 

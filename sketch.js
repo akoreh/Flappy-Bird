@@ -3,19 +3,23 @@ var pipes = [];
 var score = 0;
 var best = 0;
 var newBest = 0;
+var backgroundColor;
+
 
 function setup(){
   createCanvas(400,600);
   bird = new Bird();
   $('#best_score').html(best);
   $('#score').html(score/10);
+  colorMode(HSB);
+  backgroundColor=random(255);
 }
 
 function resetGame(){
   bird = new Bird();
   pipes.splice(0,pipes.length);
   if(newBest/10 > best){
-    best = newBest/10;
+    best = Math.floor(newBest/10);
   }
   newBest = 0;
   score = 0;
@@ -23,10 +27,15 @@ function resetGame(){
 }
 
 function draw(){
- background(0);
+  background(backgroundColor, 255, 255);
 
- if(frameCount % 100 == 0){
+ if(frameCount % 80 == 0){
    pipes.push(new Pipe());
+   bird.changeColor(random(255));
+ }
+
+ if(frameCount % 200 == 0){
+   backgroundColor = random(255);
  }
 
  for(var i = 0; i < pipes.length;i++){
@@ -60,7 +69,7 @@ function draw(){
  bird.update();
  bird.show();
 
- if(bird.y >= height){
+ if(bird.y > height){
    resetGame();
  }
 }
