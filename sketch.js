@@ -4,6 +4,21 @@ var score = 0;
 var best = 0;
 var newBest = 0;
 var backgroundColor;
+var i = 0;
+
+
+//SOUNDS
+var wingSound;
+var hitSound;
+var dieSound;
+var pointSound;
+
+function preload(){
+  wingSound = loadSound("sounds/sfx_wing.wav");
+  hitSound = loadSound("sounds/sfx_hit.wav");
+  dieSound = loadSound("sounds/sfx_die.wav");
+  pointSound = loadSound("sounds/sfx_point.wav");
+}
 
 
 function setup(){
@@ -43,11 +58,18 @@ function draw(){
    pipes[i].show();
 
    if(pipes[i].colliding(bird)){
+     pointSound.stop();
+     hitSound.play();
      resetGame();
      break;
    }
 
    if(pipes[i].passed(bird)){
+     if(!pipes[i].isPassed){
+       pointSound.play();
+       pipes[i].isPassed = true;
+     }
+     console.log("passed");
      score++;
      newBest++;
      $('#score').html(Math.floor(score/10));
@@ -62,7 +84,6 @@ function draw(){
  for(var i = pipes.length-1; i >= 0; i--){
    if(pipes[i].offscreen()){
      pipes.splice(i,1);
-     console.log("pipe deleted");
    }
  }
 
@@ -70,6 +91,7 @@ function draw(){
  bird.show();
 
  if(bird.y > height){
+   dieSound.play();
    resetGame();
  }
 }
@@ -77,5 +99,7 @@ function draw(){
 function keyPressed(){
   if(key == " "){
     bird.up();
+    wingSound.play();
+
   }
 }

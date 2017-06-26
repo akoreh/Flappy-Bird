@@ -5,7 +5,7 @@ function Pipe(){
   this.width = 35;
   this.speed = 2.7;
   this.x = width;
-
+  this.isPassed = false;
 
   this.show = function(){
     fill(this.color, 255, 255);
